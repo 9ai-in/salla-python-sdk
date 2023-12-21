@@ -1,0 +1,6 @@
+# pyproject.toml
+
+[tool.black]
+line-length = 65
+target-version = ['py310']  # Specify your target Python versions
+include = '\.pyi?$'
