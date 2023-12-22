@@ -1,19 +1,12 @@
-from .schemas.tokens import (
-    Refresh_Token_Payload,
-    Refresh_Token_Response,
-    ErrorToken,
-)
+from typing import Union
+
+from .Config import ENV
 from .schemas.merchant import MerchantInfo, StoreInfo
-from .schemas.webhook_events import (
-    WebhookPayload,
-    WebhookResponse,
-    Webhook_Events,
-)
+from .schemas.tokens import ErrorToken, Refresh_Token_Payload, Refresh_Token_Response
+from .schemas.webhook_events import Webhook_Events, WebhookPayload, WebhookResponse
 from .services.auth_services import generate_access_token
 from .services.merchant_services import merchant_info, store_info
 from .services.webhooks_services import subscribe_to_webhook
-from typing import Union
-from .Config import ENV
 
 
 class Salla:
@@ -23,12 +16,12 @@ class Salla:
         else:
             raise Exception("access_token cannot be None")
 
-    async def get_refresh_token(
+    async def get_access_token_from_refresh_token(
         self, payload: Refresh_Token_Payload
     ) -> Union[Refresh_Token_Response, ErrorToken]:
         return await generate_access_token(payload)
 
-    async def get_user_info(
+    async def get_merchant_info(
         self,
     ) -> Union[MerchantInfo, ErrorToken]:
         return await merchant_info(self.access_token)
@@ -41,6 +34,4 @@ class Salla:
     async def webhook_subscribe(
         self, payload: WebhookPayload
     ) -> Union[WebhookResponse, ErrorToken]:
-        return await subscribe_to_webhook(
-            payload, self.access_token
-        )
+        return await subscribe_to_webhook(payload, self.access_token)

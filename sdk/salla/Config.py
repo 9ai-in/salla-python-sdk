@@ -1,5 +1,6 @@
-from pydantic import BaseSettings
 from typing import Union
+
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):

@@ -1,6 +1,7 @@
-from pydantic import BaseModel, Field
 from enum import Enum
-from typing import List, Optional, Literal
+from typing import List, Literal, Optional
+
+from pydantic import BaseModel, Field
 
 
 class Webhook_Events(Enum):
@@ -18,18 +19,10 @@ class Webhook_Events(Enum):
     ORDER_SHIPMENT_CREATING = "order.shipment.creating"
     ORDER_SHIPMENT_CREATED = "order.shipment.created"
     ORDER_SHIPMENT_CANCELLED = "order.shipment.cancelled"
-    ORDER_SHIPMENT_RETURN_CREATING = (
-        "order.shipment.return.creating"
-    )
-    ORDER_SHIPMENT_RETURN_CREATED = (
-        "order.shipment.return.created"
-    )
-    ORDER_SHIPMENT_RETURN_CANCELLED = (
-        "order.shipment.return.cancelled"
-    )
-    ORDER_SHIPPING_ADDRESS_UPDATED = (
-        "order.shipping.address.updated"
-    )
+    ORDER_SHIPMENT_RETURN_CREATING = "order.shipment.return.creating"
+    ORDER_SHIPMENT_RETURN_CREATED = "order.shipment.return.created"
+    ORDER_SHIPMENT_RETURN_CANCELLED = "order.shipment.return.cancelled"
+    ORDER_SHIPPING_ADDRESS_UPDATED = "order.shipping.address.updated"
 
     #! PRODUCT
     PRODUCT_CREATED = "product.created"

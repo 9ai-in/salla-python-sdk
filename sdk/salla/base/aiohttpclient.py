@@ -1,16 +1,15 @@
-import aiohttp
 import asyncio
 import sys
-from typing import Optional, Any
+from typing import Any, Optional
+
+import aiohttp
 
 if (
     sys.version_info[0] == 3
     and sys.version_info[1] >= 8
     and sys.platform.startswith("win")
 ):
-    asyncio.set_event_loop_policy(
-        asyncio.WindowsSelectorEventLoopPolicy()
-    )
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 class AioHttpClient:
@@ -31,9 +30,7 @@ class AioHttpClient:
         headers: Optional[dict] = None,
         is_json: Optional[bool] = True,
     ):
-        async with self.session.get(
-            url, params=params, headers=headers
-        ) as response:
+        async with self.session.get(url, params=params, headers=headers) as response:
             return await self._handle_response(response, is_json)
 
     async def post(
@@ -66,6 +63,5 @@ class AioHttpClient:
                 response.request_info,
                 response.history,
                 status=response.status,
-                message=(await response.json())
-                or response.reason,
+                message=(await response.json()) or response.reason,
             )

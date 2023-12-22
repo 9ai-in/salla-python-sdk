@@ -1,6 +1,10 @@
 # pyproject.toml
+[tool.isort]
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
 
 [tool.black]
-line-length = 65
+line-length = 88
 target-version = ['py310']  # Specify your target Python versions
 include = '\.pyi?$'
