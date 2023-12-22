@@ -1,14 +1,12 @@
-from salla.base.aiohttpclient import AioHttpClient, aiohttp
-from salla.constant import (
-    HEADER_FORM_URL_ENCODED,
-    REFRESH_TOKEN_URL_POST,
-)
-from salla.schemas.tokens import (
-    Refresh_Token_Response,
-    Refresh_Token_Payload,
-    ErrorToken,
-)
 from typing import Union
+
+from salla.base.aiohttpclient import AioHttpClient, aiohttp
+from salla.constant import HEADER_FORM_URL_ENCODED, REFRESH_TOKEN_URL_POST
+from salla.schemas.tokens import (
+    ErrorToken,
+    Refresh_Token_Payload,
+    Refresh_Token_Response,
+)
 
 
 async def generate_access_token(

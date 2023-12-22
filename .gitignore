@@ -5,3 +5,6 @@ __pycache__
 venv
 creds.md
 nk.test.py
+salla_sdk.egg-info
+salla_python_sdk.egg-info
+dist

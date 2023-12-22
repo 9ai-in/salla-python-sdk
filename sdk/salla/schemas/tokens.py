@@ -1,5 +1,6 @@
+from typing import Dict, Optional, Union
+
 from pydantic import BaseModel
-from typing import Optional, Dict, Union
 
 
 class Refresh_Token_Response(BaseModel):
