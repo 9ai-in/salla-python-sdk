@@ -23,9 +23,7 @@ async def main():
         url="https://webhook.site/2453453-123n7bad6va123",
         security_strategy="token",
     )
-    print(
-        await s.webhook_subscribe(wb_payload, ENV.ACCESS_TOKEN)
-    )
+    print(await s.webhook_subscribe(wb_payload))
     print("---" * 10)
 
     ref = Refresh_Token_Payload(

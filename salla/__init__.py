@@ -39,6 +39,8 @@ class Salla:
         return await store_info(self.access_token)
 
     async def webhook_subscribe(
-        self, payload: WebhookPayload, access_token: str
+        self, payload: WebhookPayload
     ) -> Union[WebhookResponse, ErrorToken]:
-        return await subscribe_to_webhook(payload, access_token)
+        return await subscribe_to_webhook(
+            payload, self.access_token
+        )
