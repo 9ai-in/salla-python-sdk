@@ -1,9 +1,9 @@
 from pydantic import BaseModel, Field
 from enum import Enum
-from typing import List, Optional, Dict
+from typing import List, Optional, Literal
 
 
-class Webhook_Events(Enum, str):
+class Webhook_Events(Enum):
     #! ORDER
     ORDER_CREATED = "order.created"
     ORDER_UPDATED = "order.updated"
@@ -99,7 +99,7 @@ class WebhookData(BaseModel):
     name: str
     event: str
     version: str
-    rule: str
+    rule: Optional[str] = None
     url: str
     headers: List[str]
     security: SecurityConfig
@@ -136,9 +136,7 @@ class WebhookPayload(BaseModel):
     version: Optional[str] = "2"
     rule: Optional[str] = None
     url: str
-    security_strategy: str = Field(
-        ..., description="Can be 'signature', 'token', or 'none'"
-    )
+    security_strategy: Literal["signature", "token", "none"]
     secret: str
 
     class Config:

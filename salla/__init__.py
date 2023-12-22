@@ -4,8 +4,14 @@ from .schemas.tokens import (
     ErrorToken,
 )
 from .schemas.merchant import MerchantInfo, StoreInfo
+from .schemas.webhook_events import (
+    WebhookPayload,
+    WebhookResponse,
+    Webhook_Events,
+)
 from .services.auth_services import generate_access_token
 from .services.merchant_services import merchant_info, store_info
+from .services.webhooks_services import subscribe_to_webhook
 from typing import Union
 from .Config import ENV
 
@@ -31,3 +37,8 @@ class Salla:
         self,
     ) -> Union[StoreInfo, ErrorToken]:
         return await store_info(self.access_token)
+
+    async def webhook_subscribe(
+        self, payload: WebhookPayload, access_token: str
+    ) -> Union[WebhookResponse, ErrorToken]:
+        return await subscribe_to_webhook(payload, access_token)
