@@ -152,20 +152,3 @@ class WebhookPayload(BaseModel):
             "security_strategy": "signature",
             "secret": "ac3ea83628cccf2e98afc34223e4eeb5b41800b77737938aeed4exxx",
         }
-
-
-class WebhookErrorResposne(BaseModel):
-    status: int
-    success: bool
-    error: Dict[str, str]
-
-    class Config:
-        schema_extra = {
-            "status": 422,
-            "success": False,
-            "error": {
-                "code": "error",
-                "message": "alert.invalid_fields",
-                "fields": {"event": ["حقل event غير صالح"]},
-            },
-        }
