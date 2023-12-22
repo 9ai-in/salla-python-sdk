@@ -1,18 +1,18 @@
-from salla import Salla, tokens
+from salla import (
+    Salla,
+    Refresh_Token_Payload,
+    Refresh_Token_Response,
+    ENV,
+)
 import asyncio
 
 
 async def main():
-    s = Salla("access_token")
-    print(
-        await s.get_refresh_token(
-            payload=tokens.Refresh_Token_Payload(
-                client_id="",
-                client_secret="",
-                refresh_token="",
-            )
-        )
-    )
+    s = Salla(ENV.ACCESS_TOKEN)
+    print(await s.get_user_info())
+    print("====" * 10)
+    print(await s.get_store_info())
+    print("+++" * 10)
 
 
 asyncio.run(main())

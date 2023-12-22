@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Dict, Union
 
 
 class Refresh_Token_Response(BaseModel):
@@ -18,6 +18,7 @@ class Refresh_Token_Payload(BaseModel):
 
 
 class ErrorToken(BaseModel):
-    status: int
-    error: str
-    error_description: str
+    status: Optional[int] = None
+    success: Optional[bool] = None
+    error: Union[Dict, str] = None
+    error_description: Optional[str] = None
