@@ -29,7 +29,7 @@ class AioHttpClient:
         params: Optional[dict] = None,
         headers: Optional[dict] = None,
         is_json: Optional[bool] = True,
-    ):
+    ) -> Any:
         async with self.session.get(url, params=params, headers=headers) as response:
             return await self._handle_response(response, is_json)
 
@@ -47,6 +47,16 @@ class AioHttpClient:
             json=json,
             headers=headers,
         ) as response:
+            return await self._handle_response(response, is_json)
+
+    async def delete(
+        self,
+        url: str,
+        params: Optional[dict] = None,
+        headers: Optional[dict] = None,
+        is_json: Optional[bool] = True,
+    ) -> Any:
+        async with self.session.delete(url, params=params, headers=headers) as response:
             return await self._handle_response(response, is_json)
 
     async def _handle_response(

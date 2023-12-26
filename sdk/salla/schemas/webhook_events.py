@@ -1,7 +1,7 @@
 from enum import Enum
-from typing import List, Literal, Optional
+from typing import List, Literal, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class Webhook_Events(Enum):
@@ -89,7 +89,7 @@ class SecurityConfig(BaseModel):
 
 class WebhookData(BaseModel):
     id: int
-    name: str
+    name: Union[str, None]
     event: str
     version: str
     rule: Optional[str] = None
@@ -101,7 +101,7 @@ class WebhookData(BaseModel):
 class WebhookResponse(BaseModel):
     status: int
     success: bool
-    data: WebhookData
+    data: Union[List[WebhookData], WebhookData, str, dict]
 
     class Config:
         schema_extra = {
@@ -143,3 +143,15 @@ class WebhookPayload(BaseModel):
             "security_strategy": "signature",
             "secret": "ac3ea83628cccf2e98afc34223e4eeb5b41800b77737938aeed4exxx",
         }
+
+
+class EventData(BaseModel):
+    id: int
+    label: str
+    event: str
+
+
+class EventResponse(BaseModel):
+    status: int
+    success: bool
+    data: List[EventData]
