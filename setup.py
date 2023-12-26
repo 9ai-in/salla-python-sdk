@@ -3,13 +3,13 @@ from setuptools import find_packages, setup
 with open("README.md", "r") as f:
     long_description = f.read()
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 setup(
     name="salla-python-sdk",
     version=VERSION,
     description="A python SDK for salla integration",
     package_dir={"": "sdk"},
-    packages=find_packages(where="sdk"),
+    packages=find_packages(where="sdk", exclude="tests"),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/9ai-in/salla-python-sdk/",
@@ -33,7 +33,7 @@ setup(
         "python-dotenv==1.0.0",
     ],
     extras_require={
-        "dev": ["pytest>=7.0", "twine>=4.0.2"],
+        "dev": ["pytest>=7.4.3", "pytest-asyncio>=0.23.2", "twine>=4.0.2"],
     },
     python_requires="~=3.10",
 )
