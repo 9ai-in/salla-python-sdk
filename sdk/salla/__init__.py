@@ -2,14 +2,22 @@ from typing import Optional, Union
 
 from .Config import ENV
 from .schemas.merchant import MerchantInfo, StoreInfo
-from .schemas.tokens import ErrorToken, Refresh_Token_Payload, Refresh_Token_Response
+from .schemas.tokens import (
+    Access_Token_Payload,
+    Access_Token_Response,
+    ErrorToken,
+    Refresh_Token_Payload,
+)
 from .schemas.webhook_events import (
+    EventResponse,
     Webhook_Events,
     WebhookPayload,
     WebhookResponse,
-    EventResponse,
 )
-from .services.auth_services import generate_access_token
+from .services.auth_services import (
+    generate_access_token_by_code,
+    generate_access_token_by_refresh_token,
+)
 from .services.merchant_services import merchant_info, store_info
 from .services.webhooks_services import (
     list_active_webhooks,
@@ -37,7 +45,7 @@ class Salla:
 
     async def get_access_token_from_refresh_token(
         self, payload: Refresh_Token_Payload
-    ) -> Union[Refresh_Token_Response, ErrorToken]:
+    ) -> Union[Access_Token_Response, ErrorToken]:
         """
         Get a new access token using a refresh token.
 
@@ -45,10 +53,25 @@ class Salla:
             payload (Refresh_Token_Payload): Payload containing refresh token information.
 
         Returns:
-            Union[Refresh_Token_Response, ErrorToken]: Response containing the new access token
+            Union[Access_Token_Response, ErrorToken]: Response containing the new access token
             or an error token if the request fails.
         """
-        return await generate_access_token(payload)
+        return await generate_access_token_by_refresh_token(payload)
+
+    async def generate_access_token_from_code(
+        self, payload: Access_Token_Payload
+    ) -> Union[Access_Token_Response, ErrorToken]:
+        """
+        Get access token using code.
+
+        Args:
+            payload (Access_Token_Payload): Payload containing access token information.
+
+        Returns:
+            Union[Access_Token_Response, ErrorToken]: Response containing access token
+            or an error token if the request fails.
+        """
+        return await generate_access_token_by_code(payload)
 
     async def get_merchant_info(
         self,

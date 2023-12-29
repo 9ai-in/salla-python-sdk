@@ -22,7 +22,8 @@ $ create a .env and fill all required fields from .env.example.
 # Supported Features
 | Feature                                         | Status |
 | ----------------------------------------------- | ------ |
-| Generate Access Token                           | ✅      |
+| Generate Access Token From Code                 | ✅      |
+| Generate Access Token From Refresh Token        | ✅      |
 | Retrive Merchant info                           | ✅      |
 | Retrive Store info                              | ✅      |
 | Subscribe to a webhook URL                      | ✅      |
