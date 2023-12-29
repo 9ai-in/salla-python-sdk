@@ -1,6 +1,13 @@
 import asyncio
 
-from salla import ENV, Refresh_Token_Payload, Salla, Webhook_Events, WebhookPayload
+from salla import (
+    ENV,
+    Refresh_Token_Payload,
+    Salla,
+    Webhook_Events,
+    WebhookPayload,
+    Access_Token_Payload,
+)
 
 
 async def main():
@@ -40,6 +47,16 @@ async def main():
 
     # Unsubscribe from a specific webhook and print the result
     await s.unsubscribe_webhook(url="https://webhook.site/2453453-123n7bad6va123")
+
+    await s.generate_access_token_from_code(
+        payload=Access_Token_Payload(
+            client_id=ENV.CLIENT_ID,
+            client_secret=ENV.CLIENT_SECRET,
+            code="anabashdghgasdh",
+            redirect_uri="https://9ai.in"
+            #! Redirection URI should be same which was mentioned in the salla App [Custome mode]
+        )
+    )
 
 
 asyncio.run(main())
